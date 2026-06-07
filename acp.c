@@ -9,7 +9,6 @@
 
 char picture[height][width];
 
-// Clears the 2D array canvas with the background character
 void clearPicture() {
     int i, j;
     for (i = 0; i < height; i++) {
@@ -19,7 +18,6 @@ void clearPicture() {
     }
 }
 
-// Renders the 2D array canvas to the terminal screen
 void displayPicture() {
     int i, j;
     for (i = 0; i < height; i++) {
@@ -30,14 +28,12 @@ void displayPicture() {
     }
 }
 
-// Safe pixel placement wrapper with bounds checking
 void setPixel(int x, int y) {
     if (x >= 0 && x < width && y >= 0 && y < height) {
         picture[y][x] = pixel;
     }
 }
 
-// Draws lines using Bresenham's Line Generation Algorithm
 void drawLine(int x1, int y1, int x2, int y2) {
     int dx = abs(x2 - x1);
     int dy = abs(y2 - y1);
@@ -67,7 +63,6 @@ void drawLine(int x1, int y1, int x2, int y2) {
     }
 }
 
-// Draws a rectangle using 4 independent lines
 void drawRectangle(int x1, int y1, int x2, int y2) {
     drawLine(x1, y1, x2, y1); 
     drawLine(x1, y2, x2, y2); 
@@ -75,21 +70,19 @@ void drawRectangle(int x1, int y1, int x2, int y2) {
     drawLine(x2, y1, x2, y2); 
 }
 
-// Draws a triangle using 3 connected lines
 void drawTriangle(int x1, int y1, int x2, int y2, int x3, int y3) {
     drawLine(x1, y1, x2, y2);
     drawLine(x2, y2, x3, y3);
     drawLine(x3, y3, x1, y1);
 }
 
-// Draws a stretched-corrected circle matching terminal font aspect ratios
 void drawCircle(int centerx, int centery, int radius) {
     int x, y;
 
     for (y = 0; y < height; y++) {
         for (x = 0; x < width; x++) {
             float dx = x - centerx;
-            float dy = (y - centery) * 2; // Fixed aspect ratio scaling
+            float dy = (y - centery) * 2;
 
             float distanceSquare = dx * dx + dy * dy;
 
